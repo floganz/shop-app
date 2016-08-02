@@ -1,0 +1,34 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <% if user_signed_in? %>
+        <ul class="nav navbar-nav">
+          <li><a href="/">Main</a></li>
+          <li  class="<%#= 'active' if current_page?(user_path(current_user)) ||
+              current_page?(edit_user_path(current_user)) %>">
+            <%#=link_to "My account", user_path(current_user) %>
+          </li>
+          <li  class="<%#= 'active' if !current_page?(user_path(current_user)) &&
+              !current_page?(edit_user_path(current_user)) %>">
+            <a href="/products">Products</a>
+          </li>
+          <% if can? :manage, @product %>
+            <li><a href="/products/new">New product</a></li>
+          <% end %>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li ><span class="navbar-text">Здравствуйте, <%= current_user.email %>
+          </span></li>
+          <li><%= link_to 'Logout', destroy_user_session_path, :method => :delete %></li>
+        </ul>
+      <% else %>
+        <ul class="nav navbar-nav navbar-right">
+          <li  class="<%= 'active' if user_sign_in? %>"><%= link_to 'Sing in', new_user_session_path %></li>
+          <li  class="<%= 'active' if user_sign_in? %>">
+            <%= link_to 'Sing up', new_user_registration_path %>
+          </li>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,19 @@
+<%= form_tag('/search', method: "get",
+  :class => 'form-inline') do %>
+  <div class="form-group">
+    <%= label_tag(:q, "Search for") %>
+    <%= text_field_tag(:q) %>
+    <!-- ADD FORM_CONTROL CLASS TO INPUT FIELD -->
+  </div>
+  <%= submit_tag("Search", :class => 'btn btn-default') %>
+<% end %>
+
+<div class="pagination-container">
+  <%= will_paginate @products, renderer: BootstrapPagination::Rails %>
+</div>
+<div class="row">
+  <%= render partial: "display", collection: @products, as: :product %>
+</div>
+<div class="pagination-container">
+  <%= will_paginate @products, renderer: BootstrapPagination::Rails %>
+</div>

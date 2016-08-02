@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+<p id="alert"><%= alert %></p>
+<h1>User info</h1>
+<div class="row">
+  <div class="col-sm-2"><strong>Email:</strong></div>
+  <div class="col-sm-2"><%= @user.email %></div>
+</div>
+<div class="row">
+  <div class="col-sm-2"><strong>First name:</strong></div>
+  <div class="col-sm-2"><%#= @user.first_name %></div>
+</div>
+<div class="row">
+  <div class="col-sm-2"><strong>Last name:</strong></div>
+  <div class="col-sm-2"><%#= @user.last_name %></div>
+</div>
+
+<%#= link_to 'Edit', edit_user_path(@user), :class => "btn btn-default" %> |
+<%#= link_to 'Back', users_path, :class => "btn btn-default" %>

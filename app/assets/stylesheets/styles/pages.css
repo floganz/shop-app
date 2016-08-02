@@ -1,0 +1,54 @@
+#page {
+	width: 1200px;
+	margin: 0 auto;
+}
+
+#content {
+	padding: 0 20px 10px;
+}
+
+#footer {
+	width: 300px;
+	margin: auto;
+}
+
+.devise-form {
+  max-width: 50%;
+  padding: 19px 29px 29px;
+  margin: 0 auto 20px;
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+}
+
+.orders input {
+	width: 80px !important;
+}
+
+.orders .btn {
+	float: right;
+}
+
+#quantity {
+	display: block;
+}
+
+#price {
+	margin: auto;
+}
+
+.price-span {
+	font-style: italic;
+}
+
+.pagination {
+	display: inline-block;
+	margin: auto;
+}
+
+.pagination-container {
+	text-align: center;
+}
+
+.edit-btn {
+	float: right;
+}

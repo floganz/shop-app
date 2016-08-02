@@ -49,3 +49,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'dotenv-rails', :groups => [:development, :test]
 gem 'devise'
 gem "cancan"
+gem 'will_paginate-bootstrap'
+gem "paperclip", "~> 5.0.0"
