@@ -22,12 +22,15 @@
         <ul class="nav navbar-nav navbar-right">
           <li ><span class="navbar-text">Здравствуйте, <%= current_user.email %>
           </span></li>
-          <li><%= link_to 'Logout', destroy_user_session_path, :method => :delete %></li>
+          <li>
+            <%= link_to 'Logout', destroy_user_session_path, :method => :delete %>
+          </li>
         </ul>
       <% else %>
         <ul class="nav navbar-nav navbar-right">
-          <li  class="<%= 'active' if user_sign_in? %>"><%= link_to 'Sing in', new_user_session_path %></li>
-          <li  class="<%= 'active' if user_sign_in? %>">
+          <li  class="<%= cp(new_user_session_path) %>"><%= link_to 'Sing in',
+            new_user_session_path %></li>
+          <li  class="<%= cp(new_user_registration_path) %>">
             <%= link_to 'Sing up', new_user_registration_path %>
           </li>
         </ul>

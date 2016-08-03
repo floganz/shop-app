@@ -10,11 +10,11 @@ $(document).on("turbolinks:load",function(){
   });
   $.validate();
 
-  $(".orders").find("#order_quantity").change(function(){
+  $(".orders").find("#order_item_quantity").change(function(){
     $(this).closest("form").find(".price-span")
     .text((
       $(this).val()*$(this).closest(".caption")
-      .find("#order_price").val()
+      .find("#order_item_price").val()
     ).toFixed(2));
   })
 });

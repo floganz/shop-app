@@ -14,7 +14,7 @@
     </div>
     <% @orders.each do |row| %>
       <div class="row">
-        <div class="col-xs-3"><%= row.id %></div>
+        <div class="col-xs-3"><%= link_to row.id, order_path(row.id) %></div>
         <div class="col-xs-3"><%= row.total %></div>
       </div>
     <% end %>

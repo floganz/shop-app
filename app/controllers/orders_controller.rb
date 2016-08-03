@@ -17,6 +17,11 @@ class OrdersController < ApplicationController
     redirect_to root_path
   end
 
+  def show
+    @order = Order.find params[:id]
+    @order_items = @order.order_info
+  end
+
   private
     def set_order
       @order = Order.cur_user(current_user.id).active.first

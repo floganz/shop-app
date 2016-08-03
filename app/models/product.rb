@@ -14,8 +14,7 @@ class Product < ApplicationRecord
 
   def self.search_by_key(keyword)
     @products = Product.where("
-        products.name LIKE ? OR
-        products.name LIKE ?","%#{keyword}","#{keyword}%")
+        upper(products.name) LIKE upper(?)","#{keyword}%")
   end
 
   scope :order_by_id, -> { order("id ASC")}
