@@ -11,4 +11,12 @@ class Order < ApplicationRecord
       .joins(:product)
       .where("order_items.order_id": id)
   end
+
+  def update_storage
+    @order_items = OrderItem.order_items id
+    @order_items.each do |item|
+      @product = Product.find item.product_id
+      @product.update({:quantity => @product.quantity - item.quantity})
+    end
+  end
 end

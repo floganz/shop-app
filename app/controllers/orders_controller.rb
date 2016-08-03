@@ -2,7 +2,6 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!, :set_order
 
   def index
-    #@order ||= Order.new :user_id => current_user.id
     @items = @order.order_info
   end
 
@@ -11,11 +10,11 @@ class OrdersController < ApplicationController
     if @order.save
       flash[:success] = "Order complited"
       OrderMailer.order_notification(@order).deliver!
-      redirect_to root_path
+      @order.update_storage
     else
-      flash[:warning] = "Something go wrong"
-      redirect_to 'products?page=2'
+      flash[:danger] = "Something go wrong"
     end
+    redirect_to root_path
   end
 
   private

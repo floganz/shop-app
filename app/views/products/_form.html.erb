@@ -1,5 +1,4 @@
-<%= form_for Product.new, :html => { :multipart => true, 
-    :class => 'devise-form' } do |f| %>
+<%= form_for Product.new, :html => { :multipart => true } do |f| %>
 
   <% @product ||= Product.new %>
   <% if @product.errors.any? %>

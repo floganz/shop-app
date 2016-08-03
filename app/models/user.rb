@@ -10,8 +10,4 @@ class User < ApplicationRecord
       .where(:user_id => id)
       .where(:active => false)
   end
-
-  def set_user
-    @user = User.find params[:id]
-  end
 end

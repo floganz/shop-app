@@ -2,15 +2,20 @@
   :class => 'form-inline') do %>
   <div class="form-group">
     <%= label_tag(:q, "Search for") %>
-    <%= text_field_tag(:q) %>
-    <!-- ADD FORM_CONTROL CLASS TO INPUT FIELD -->
+    <%= text_field_tag :q, nil, class: 'form-control' %>
   </div>
   <%= submit_tag("Search", :class => 'btn btn-default') %>
 <% end %>
 
-<% if flash[:success] != "" %>
+<div id="space"></div>
+
+<% if flash[:success] %>
   <div class="alert alert-success"><%= flash[:success] %></div>
-  <% flash[:success] = "" %>
+<% end %>
+
+<% if flash[:danger] %>
+  <div class="alert alert-danger"><%= flash[:danger] %></div>
+  <% flash[:danger] = nil %>
 <% end %>
 
 <div class="pagination-container">

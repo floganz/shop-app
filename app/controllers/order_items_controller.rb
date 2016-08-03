@@ -11,18 +11,15 @@ class OrderItemsController < ApplicationController
     @order_item = OrderItem.new item_params.merge({:order_id => ord_id})
     if @order_item.save
       flash[:success] = "Added"
-      redirect_to '/products' and return
     else
-      flash[:error] = "Something go wrong, try again"
-      redirect_to '/products' and return
+      flash[:danger] = "Something go wrong, try again"
     end
-    render 'products/index'
+    redirect_to '/products'
   end
 
   def destroy
     @order_item = OrderItem.find params[:id]
     @order_item.destroy
-    #render 'orders/index'
     redirect_to orders_path
   end
 

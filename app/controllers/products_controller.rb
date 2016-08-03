@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit]
 
   def index
-    @products = Product.paginate(:page => params[:page])
+    @products = Product.order_by_id.paginate(:page => params[:page])
   end
 
   def show
@@ -12,7 +12,11 @@ class ProductsController < ApplicationController
   end
 
   def search
-    @products = Product.search_by_key(params[:keyword]).paginate(:page => params[:page])
+    @products = Product.search_by_key(params[:q]).paginate(:page => params[:page])
+    if @products.size == 0
+      flash[:danger] = "Nothing found"
+      @products = Product.order_by_id.paginate(:page => params[:page])
+    end
     render 'index'
   end
 
@@ -22,12 +26,10 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new product_params
     if @product.save
+      flash[:danger] = false
       flash[:success] = "Product added"
-      render 'new'
-    else
-      flash[:error] = "Something went wrong, try again"
-      render 'new'
     end
+    render 'new'
   end
 
   private
@@ -37,7 +39,7 @@ class ProductsController < ApplicationController
     end
 
     def product_params
-      params.require(:product).permit(:name, :description, :photo, 
-                                      :price, :quantity)
+      params.require(:product)
+            .permit(:name, :description, :photo, :price, :quantity)
     end
 end

@@ -1,4 +1,4 @@
-<div class="devise-form">
+<div class="container">
   <table class="table">
     <thead>
       <tr>
@@ -33,9 +33,11 @@
           <%= total %>
         </th>
         <th>
-          <%= form_for(@order, :method => :put) do |f| %>
-            <%= f.hidden_field :total, :value => total %>
-            <%= f.submit 'Buy', :class => 'btn btn-default' %>
+          <% if total != 0 %>
+            <%= form_for(@order, :method => :put) do |f| %>
+              <%= f.hidden_field :total, :value => total %>
+              <%= f.submit 'Buy', :class => 'btn btn-default' %>
+            <% end %>
           <% end %>
         </th>
       </tr>

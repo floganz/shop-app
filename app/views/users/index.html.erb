@@ -1,13 +1,13 @@
 <p id="notice"><%= notice %></p>
 <p id="alert"><%= alert %></p>
-<div class="devise-form">
+<div class="container">
   <h2>User</h2>
   <div class="row">
     <div class="col-xs-3"><strong>User:</strong></div>
     <div class="col-xs-3"><%= @user.email %></div>
   </div>
+  <h2>Order history</h2>
   <% if @orders.size != 0 %>
-    <h2>Order history</h2>
     <div class="row">
       <div class="col-xs-3"><strong>Order id</strong></div>
       <div class="col-xs-3"><strong>Order price</strong></div>
@@ -19,5 +19,6 @@
       </div>
     <% end %>
   <% else %>
+    <p>No complited orders yet</p>
   <% end %>
 </div>
