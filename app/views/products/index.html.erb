@@ -8,6 +8,11 @@
   <%= submit_tag("Search", :class => 'btn btn-default') %>
 <% end %>
 
+<% if flash[:success] != "" %>
+  <div class="alert alert-success"><%= flash[:success] %></div>
+  <% flash[:success] = "" %>
+<% end %>
+
 <div class="pagination-container">
   <%= will_paginate @products, renderer: BootstrapPagination::Rails %>
 </div>

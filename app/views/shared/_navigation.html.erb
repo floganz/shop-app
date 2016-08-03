@@ -3,17 +3,20 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <% if user_signed_in? %>
         <ul class="nav navbar-nav">
-          <li><a href="/">Main</a></li>
-          <li  class="<%#= 'active' if current_page?(user_path(current_user)) ||
-              current_page?(edit_user_path(current_user)) %>">
-            <%#=link_to "My account", user_path(current_user) %>
+          <li class="<%= cp(root_path) %>"><a href="/">Main</a></li>
+          <li class="<%= cp(users_path) %>">
+            <%=link_to "My account", users_path %>
           </li>
-          <li  class="<%#= 'active' if !current_page?(user_path(current_user)) &&
-              !current_page?(edit_user_path(current_user)) %>">
+          <li class="<%= cp(products_path) %>">
             <a href="/products">Products</a>
           </li>
+          <li class="<%= cp(orders_path) %>">
+            <a href="/orders">Orders</a>
+          </li>
           <% if can? :manage, @product %>
-            <li><a href="/products/new">New product</a></li>
+            <li class="<%= cp(new_product_path) %>">
+              <a href="/products/new">New product</a>
+            </li>
           <% end %>
         </ul>
         <ul class="nav navbar-nav navbar-right">

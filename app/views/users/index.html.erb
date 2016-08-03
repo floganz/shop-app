@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+<p id="alert"><%= alert %></p>
+<div class="devise-form">
+  <h2>User</h2>
+  <div class="row">
+    <div class="col-xs-3"><strong>User:</strong></div>
+    <div class="col-xs-3"><%= @user.email %></div>
+  </div>
+  <% if @orders.size != 0 %>
+    <h2>Order history</h2>
+    <div class="row">
+      <div class="col-xs-3"><strong>Order id</strong></div>
+      <div class="col-xs-3"><strong>Order price</strong></div>
+    </div>
+    <% @orders.each do |row| %>
+      <div class="row">
+        <div class="col-xs-3"><%= row.id %></div>
+        <div class="col-xs-3"><%= row.total %></div>
+      </div>
+    <% end %>
+  <% else %>
+  <% end %>
+</div>

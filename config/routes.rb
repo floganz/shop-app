@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   get 'search', to: 'products#search'
 
-  resources :users, :products, :orders
+  resources :users, :products, :orders, :order_items
 
 
 end

@@ -24,7 +24,7 @@
 	width: 80px !important;
 }
 
-.orders .btn {
+.orders .btn, .edit-btn {
 	float: right;
 }
 
@@ -47,8 +47,4 @@
 
 .pagination-container {
 	text-align: center;
-}
-
-.edit-btn {
-	float: right;
 }

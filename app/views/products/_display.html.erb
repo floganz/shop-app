@@ -11,10 +11,11 @@
       <p>Price per one - $ 
         <span class="price-span"><%= product.price %></span>
       </p>
-      <%= form_for(:order, :method => 'post',
-          :html => { :class => 'form-inline orders' }) do |f| %>
+      <%= form_for OrderItem.new,
+          :html => { :class => 'form-inline orders' } do |f| %>
         <div class="form-group">
           <%= f.hidden_field :price, :value => product.price %>
+          <%= f.hidden_field :product_id, :value => product.id %>
           <%= f.label :quantity %>
           <%= f.text_field :quantity, :class => 'form-control',
           :data => { :validation => 'number',

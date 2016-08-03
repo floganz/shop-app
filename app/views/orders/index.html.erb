@@ -1,0 +1,44 @@
+<div class="devise-form">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% total = 0 %>
+      <% @items.each do |row| %>
+        <tr>
+          <td><%= row.name %></td>
+          <td><%= row.quantity %></td>
+            <% total+=row.quantity*row.price %>
+          <td><%= row.quantity*row.price %></td>
+          <td>
+            <%= form_for(row, :url => order_item_path(row.id),
+              :method => :delete) do |f| %>
+              <%= f.submit 'Remove', :class => 'btn btn-default' %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      <tr>
+        <th>
+          Total
+        </th>
+        <th></th>
+        <th>
+          <%= total %>
+        </th>
+        <th>
+          <%= form_for(@order, :method => :put) do |f| %>
+            <%= f.hidden_field :total, :value => total %>
+            <%= f.submit 'Buy', :class => 'btn btn-default' %>
+          <% end %>
+        </th>
+      </tr>
+    </tbody>
+  </table>
+</div>

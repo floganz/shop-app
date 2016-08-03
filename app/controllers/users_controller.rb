@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user
 
   def index
-    
+    @orders = @user.history
   end
 
   private
