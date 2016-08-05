@@ -51,3 +51,4 @@ gem 'devise'
 gem "cancan"
 gem 'will_paginate-bootstrap'
 gem "paperclip", "~> 5.0.0"
+gem 'paypal-sdk-rest'

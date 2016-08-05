@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit]
+  before_action :set_product, :only => [:show, :edit]
 
   def index
     @products = Product.order_by_id.paginate(:page => params[:page])
@@ -33,8 +33,17 @@ class ProductsController < ApplicationController
     render 'new'
   end
 
+  def update
+    #@product = Product.new product_params
+    @product = Product.find params[:id]
+    if @product.update product_params
+      flash[:danger] = false
+      flash[:success] = "Product edited"
+    end
+    render 'new'
+  end
+
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_product
       @product = Product.find(params[:id])
     end

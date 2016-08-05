@@ -6,8 +6,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   def history
-    @orders = Order.select("orders.*")
-      .where(:user_id => id)
-      .where(:active => false)
+    self.orders.where(:active => false)
   end
 end

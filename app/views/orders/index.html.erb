@@ -4,7 +4,7 @@
       <tr>
         <th>Name</th>
         <th>Quantity</th>
-        <th>Price $</th>
+        <th>Total $</th>
         <th></th>
       </tr>
     </thead>
@@ -12,7 +12,7 @@
       <% total = 0 %>
       <% @items.each do |row| %>
         <tr>
-          <td><%= row.name %></td>
+          <td><%= row.product.name %></td>
           <td><%= row.quantity %></td>
             <% total+=row.quantity*row.price %>
           <td><%= row.quantity*row.price %> $</td>
@@ -30,13 +30,13 @@
         </th>
         <th></th>
         <th>
-          <%= total %> $
+          <%= total.round(2) %> $
         </th>
         <th>
           <% if total != 0 %>
-            <%= form_for(@order, :method => :put) do |f| %>
-              <%= f.hidden_field :total, :value => total %>
-              <%= f.submit 'Buy', :class => 'btn btn-default' %>
+            <%= form_tag payments_new_path, :method => :get do %>
+                <%= hidden_field :total, :val,:value => total %>
+                <%= submit_tag 'Buy', :class => 'btn btn-default' %>
             <% end %>
           <% end %>
         </th>

@@ -9,13 +9,13 @@ class Product < ApplicationRecord
   validates :quantity, numericality: { only_integer: true,
     message: "must be integer" }
 
+  scope :order_by_id, -> { order("id ASC")}
+
   # Number records per page
   self.per_page = 9
 
   def self.search_by_key(keyword)
-    @products = Product.where("
+    @products = where("
         upper(products.name) LIKE upper(?)","#{keyword}%")
   end
-
-  scope :order_by_id, -> { order("id ASC")}
 end

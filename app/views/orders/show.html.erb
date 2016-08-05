@@ -4,14 +4,14 @@
       <tr>
         <th>Name</th>
         <th>Quantity</th>
-        <th>Price $</th>
+        <th>Total $</th>
       </tr>
     </thead>
     <tbody>
       <% total = 0 %>
       <% @order_items.each do |row| %>
         <tr>
-          <td><%= row.name %></td>
+          <td><%= row.product.name %></td>
           <td><%= row.quantity %></td>
             <% total+=row.quantity*row.price %>
           <td><%= row.quantity*row.price %> $</td>

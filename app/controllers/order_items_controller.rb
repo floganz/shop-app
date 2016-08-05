@@ -1,15 +1,11 @@
 class OrderItemsController < ApplicationController
   def create
     # Check if exist active order for current user, if not - create new
-    if Order.cur_user(current_user).active.size == 0
-      @order = Order.new :user_id => current_user.id
-      @order.save
-      ord_id = @order.id
-    else
-      ord_id = Order.find_by(:user_id => current_user.id, :active => true).id
+    unless (@order = Order.cur_user(current_user).active.first)
+      @order = current_user.orders.create
     end
-    @order_item = OrderItem.new item_params.merge({:order_id => ord_id})
-    if @order_item.save
+    @order_item = @order.order_items.create item_params
+    if @order_item.valid?
       flash[:success] = "Added"
     else
       flash[:danger] = "Something go wrong, try again"

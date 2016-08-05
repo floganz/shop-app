@@ -1,58 +1,42 @@
 class PaymentsController < ApplicationController
-  before_action :set_user, :only => [:index]
-  #include payment_custom
-
-  def getresponce
-    flash[:success] = "All done"
-    redirect_to root_path
-  end
+  before_action :set_order, :only => [:new, :execute]
 
   def new
     @payment = PayPal::SDK::REST::Payment.new payment_params
 
-    # Create Payment and return status
     if @payment.create
-      # Redirect the user to given approval url
       @redirect_url = @payment.links.find{|v| v.method == "REDIRECT" }.href
-      logger.info "Payment[#{@payment.id}]"
-      logger.info "Redirect: #{@redirect_url}"
+      @payment_local = Payment.create({
+        :payment_id => @payment.id,
+        :order_id => @order.id,
+        :total => @payment.transactions[-1].amount.total
+      })
+      redirect_to @redirect_url and return
     else
       logger.error @payment.error.inspect
     end
+    redirect_to root_path
   end
 
   def execute
-    payment = Payment.find params[:id]
-
-    if payment.execute( :payer_id => params[:payer_id] )
+    payment = PayPal::SDK::REST::Payment.find params[:paymentId]
+    if payment.execute(:payer_id => params[:PayerID])
       flash[:success] = "All done with execute"
-      redirect_to root_path
+      @payment = Payment.find_by :payment_id => payment.id
+      @payment.update(:complited => true)
+      @order.update({
+        :total => payment.transactions[-1].amount.total,
+        :active => false})
     else
       payment.error # Error Hash
-      flash[:danger] = "Failed with execute"
-      redirect_to root_path
+      flash[:danger] = "Payment failed"
     end
-  end
-
-  def makepayment
-    payment = Payment.find params[:id]
-
-    if payment.execute( :payer_id => "DUFRQ8GWYMJXC" )
-      flash[:success] = "All done with makepayment"
-      redirect_to root_path
-      # Success Message
-      # Note that you'll need to `Payment.find` the payment again to access user info like shipping address
-    else
-      payment.error # Error Hash
-      flash[:danger] = "Failed with makepayment"
-      redirect_to root_path
-    end
+    redirect_to root_path
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(current_user.id)
+    def set_order
+      @order = Order.cur_user(current_user.id).active.first
     end
 
     def payment_params
@@ -63,14 +47,14 @@ class PaymentsController < ApplicationController
         :redirect_urls => {
           :return_url => "http://localhost:3000/payments/execute",
           :cancel_url => "http://localhost:3000/" },
-
-        :transactions =>  [{}],
         :description =>  "This is the payment transaction description." 
       }
       .merge({
-        :amount => {
-          :total => params[:total],
-          :currency => "USD" }
+        :transactions =>  [{
+          :amount => {
+            :total => params[:total][:val],
+            :currency => "USD" }
+        }]
       })
     end
 end

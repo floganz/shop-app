@@ -105,6 +105,10 @@ GEM
       cocaine (~> 0.5.5)
       mime-types
       mimemagic (~> 0.3.0)
+    paypal-sdk-rest (1.4.9)
+      multi_json (~> 1.0)
+      uuidtools (~> 2.1)
+      xml-simple
     pg (0.18.4)
     pkg-config (1.1.7)
     puma (3.6.0)
@@ -168,6 +172,7 @@ GEM
       thread_safe (~> 0.1)
     uglifier (3.0.1)
       execjs (>= 0.3.0, < 3)
+    uuidtools (2.1.5)
     warden (1.2.6)
       rack (>= 1.0)
     web-console (3.3.1)
@@ -181,6 +186,7 @@ GEM
     will_paginate (3.1.0)
     will_paginate-bootstrap (1.0.1)
       will_paginate (>= 3.0.3)
+    xml-simple (1.1.5)
 
 PLATFORMS
   ruby
@@ -195,6 +201,7 @@ DEPENDENCIES
   jquery-rails
   listen (~> 3.0.5)
   paperclip (~> 5.0.0)
+  paypal-sdk-rest
   pg (~> 0.18)
   puma (~> 3.0)
   rails (~> 5.0.0)
