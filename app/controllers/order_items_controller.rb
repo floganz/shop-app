@@ -4,6 +4,10 @@ class OrderItemsController < ApplicationController
     unless (@order = Order.cur_user(current_user).active.first)
       @order = current_user.orders.create
     end
+    # unless !cookies[:order_id].nil?
+    #   @order = current_user.orders.create
+    #   cookies[:order_id] = @order.id
+    # end
     @order_item = @order.order_items.create item_params
     if @order_item.valid?
       flash[:success] = "Added"

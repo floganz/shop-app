@@ -14,8 +14,8 @@
         <tr>
           <td><%= row.product.name %></td>
           <td><%= row.quantity %></td>
-            <% total+=row.quantity*row.price %>
-          <td><%= row.quantity*row.price %> $</td>
+            <% total+=(row.quantity*row.price).round(2) %>
+          <td><%= (row.quantity*row.price).round(2) %> $</td>
           <td>
             <%= form_for(row, :url => order_item_path(row.id),
               :method => :delete) do |f| %>

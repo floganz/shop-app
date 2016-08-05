@@ -6,4 +6,8 @@ class OrderMailer < ApplicationMailer
     mail :to => @order.user.email, :subject => "Order notification"
   end
 
+  def order_fail(order)
+    @order = order
+    mail :to => @order.user.email, :subject => "Order failed"
+  end
 end

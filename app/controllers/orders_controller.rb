@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_order, :only => [:update, :index]
-  after_action :after_save, :only => [:update]
+  before_action :set_order, :only => [:update, :index, :order_validation]
+  #after_rollback :custom_error, on: :update
 
   def index
     @items = @order.order_items
@@ -36,10 +36,9 @@ class OrdersController < ApplicationController
       params.require(:order).permit(:total)
     end
 
-    def after_save
-      @order.order_items.each do |item|
-        @product = item.product
-        @product.update({:quantity => @product.quantity - item.quantity})
-      end
+    def custom_error
+      flash[:danger] = "Order validation error (custom_error)"
+      OrderMailer.order_fail(@order).deliver!
+      redirect_to root_path and return    
     end
 end

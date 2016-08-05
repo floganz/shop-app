@@ -9,8 +9,9 @@ class PaymentsController < ApplicationController
       @payment_local = Payment.create({
         :payment_id => @payment.id,
         :order_id => @order.id,
-        :total => @payment.transactions[-1].amount.total
+        :total => @payment.transactions.last.amount.total
       })
+      @order.update({ :total => params[:total][:val] })
       redirect_to @redirect_url and return
     else
       logger.error @payment.error.inspect
@@ -21,12 +22,15 @@ class PaymentsController < ApplicationController
   def execute
     payment = PayPal::SDK::REST::Payment.find params[:paymentId]
     if payment.execute(:payer_id => params[:PayerID])
-      flash[:success] = "All done with execute"
       @payment = Payment.find_by :payment_id => payment.id
       @payment.update(:complited => true)
-      @order.update({
-        :total => payment.transactions[-1].amount.total,
-        :active => false})
+      if @order.order_valid?
+        flash[:success] = "Ordr validation complite"
+        OrderMailer.order_notification(@order).deliver!
+      else
+        flash[:danger] = "Order validation error"
+        OrderMailer.order_fail(@order).deliver!
+      end
     else
       payment.error # Error Hash
       flash[:danger] = "Payment failed"

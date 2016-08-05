@@ -13,26 +13,11 @@
     <table width="350px" align="center" 
       style="padding: 20px 10px">
       <tr>
-        <td>Product name</td>
-        <td>Quantity</td>
-        <td>Price</td>
-      </tr>
-      <% @order.order_items.each do |row| %>
-        <tr>
-          <td><%= row.product.name %></td>
-          <td><%= row.quantity %></td>
-          <td><%= row.quantity*row.price %></td>
-        </tr>
-      <% end %>
-      <tr>
-        <td>Total</td>
-        <td></td>
-        <td><%= @order.total %></td>
+        <td>We are sorry but something go wrong. 
+          Probably it's just not enough products at the warehouse
+        </td>
       </tr>
     </table>
-  </tr>
-  <tr>
-    <td width="350px" align="center">Order status: complite</td>
   </tr>
   <tr>
     <td align="center" bgcolor="#e6e6e6"

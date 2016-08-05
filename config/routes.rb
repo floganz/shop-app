@@ -8,6 +8,4 @@ Rails.application.routes.draw do
   get '/payments/execute', to: 'payments#execute'
 
   resources :users, :products, :orders, :order_items
-
-
 end
