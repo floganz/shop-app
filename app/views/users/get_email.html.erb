@@ -1,0 +1,12 @@
+<div class="container">
+  <%= form_for User.new, :method => :post do |f| %>
+      <%= f.hidden_field :password, :value => params[:password] %>
+      <%= f.hidden_field :provider, :value => 'git' %>
+      <%= f.hidden_field :uid, :value => params[:nickname] %>
+    <div class="form-group">
+      <%= f.label :email%>
+      <%= f.text_field :email, :class => 'form-control' %>
+    </div>
+    <%= submit_tag 'Send', :class => 'btn btn-default' %>
+  <% end %>
+</div>

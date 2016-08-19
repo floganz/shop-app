@@ -13,6 +13,9 @@
           <li class="<%= cp(orders_path) %>">
             <a href="/orders">Orders</a>
           </li>
+          <li class="<%= cp(products_result_path) %>">
+            <a href="/products">Result</a>
+          </li>
           <% if can? :manage, @product %>
             <li class="<%= cp(new_product_path) %>">
               <a href="/products/new">New product</a>

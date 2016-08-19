@@ -16,3 +16,5 @@
 //= require_tree .
 //= require bootstrap.min
 //= require jquery.form-validator.min
+//= require typeahead.bundle
+//= require jquery-ui

@@ -1,4 +1,5 @@
 class OrderItemsController < ApplicationController
+  before_action :authenticate_user!
   def create
     # Check if exist active order for current user, if not - create new
     unless (@order = Order.cur_user(current_user).active.first)

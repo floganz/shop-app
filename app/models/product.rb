@@ -1,4 +1,10 @@
+# require 'elasticsearch/model'
+
 class Product < ApplicationRecord
+  # include Elasticsearch::Model
+  # include Elasticsearch::Model::Callbacks
+  searchkick searchable: [:name, :description]
+
   has_many :order_item
 
   has_attached_file :photo, styles: { medium: "200x200>" }, 
